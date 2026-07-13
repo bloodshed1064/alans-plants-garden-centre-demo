@@ -1,0 +1,169 @@
+/* Garden-centre mock, retuned from the coffee-shop base template.
+   Palette derived from Alan's Plants' own logo (green cypress trees,
+   dark green ink on cream/white) — see assets/CREDITS.md. */
+
+:root {
+  --cream: #f5f3ea;        /* page background */
+  --cream-2: #e8e4d2;      /* raised cards / alt sections */
+  --espresso: #22351f;     /* primary ink (deep leaf green) */
+  --roast: #3d5236;        /* secondary ink */
+  --caramel: #7a9d54;      /* accent (leaf green) */
+  --caramel-deep: #4a6b32; /* accent hover / small text on cream */
+  --foam: #fffdf7;         /* lightest surface */
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--espresso);
+  font-family: "Karla", system-ui, sans-serif;
+  font-size: 16.5px;
+  line-height: 1.65;
+}
+h1, h2, h3, .brand { font-family: "Fraunces", Georgia, serif; font-weight: 500; letter-spacing: -0.01em; }
+a { color: var(--caramel-deep); }
+.center { text-align: center; }
+
+.eyebrow {
+  font-size: 12px; letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--caramel-deep); font-weight: 700; margin-bottom: 10px;
+}
+
+/* nav */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px clamp(20px, 5vw, 64px);
+  background: color-mix(in srgb, var(--cream) 88%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid color-mix(in srgb, var(--espresso) 10%, transparent);
+}
+.brand { font-size: 21px; color: var(--espresso); text-decoration: none; }
+.nav-links { display: flex; gap: clamp(14px, 3vw, 30px); align-items: center; }
+.nav-links a { text-decoration: none; color: var(--roast); font-weight: 500; font-size: 15px; }
+.nav-links a:hover { color: var(--espresso); }
+.nav-cta {
+  border: 1.5px solid var(--caramel); border-radius: 999px; padding: 7px 16px;
+  color: var(--caramel-deep) !important;
+}
+.nav-cta:hover { background: var(--caramel); color: var(--foam) !important; }
+
+/* hero */
+.hero {
+  position: relative; text-align: center;
+  padding: clamp(70px, 12vw, 130px) 24px clamp(60px, 10vw, 110px);
+  background:
+    radial-gradient(ellipse 90% 70% at 50% -10%, color-mix(in srgb, var(--caramel) 16%, transparent), transparent 70%),
+    var(--cream);
+  overflow: hidden;
+}
+.hero h1 { font-size: clamp(44px, 8vw, 84px); line-height: 1.04; margin: 6px 0 18px; }
+.tagline { font-size: clamp(17px, 2.4vw, 21px); color: var(--roast); max-width: 560px; margin: 0 auto 34px; }
+.hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-block; text-decoration: none; font-weight: 700; font-size: 15.5px;
+  background: var(--espresso); color: var(--foam);
+  padding: 13px 28px; border-radius: 999px; transition: transform .15s, background .15s;
+}
+.btn:hover { background: var(--roast); transform: translateY(-1px); }
+.btn.ghost { background: transparent; color: var(--espresso); border: 1.5px solid var(--espresso); }
+.btn.ghost:hover { background: var(--espresso); color: var(--foam); }
+
+/* hero with a real photo: <header class="hero has-photo" style="--hero-photo: url('assets/hero.jpg')">
+   — a scrim in the page colour keeps the headline readable over the image */
+.hero.has-photo {
+  background:
+    linear-gradient(
+      color-mix(in srgb, var(--cream) 88%, transparent),
+      color-mix(in srgb, var(--cream) 62%, transparent) 55%,
+      var(--cream)),
+    var(--hero-photo) center / cover no-repeat;
+}
+
+/* feature strip */
+.strip {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px;
+  padding: 0 clamp(20px, 5vw, 64px); margin: -26px auto 0; max-width: 1080px; position: relative; z-index: 2;
+}
+.strip-card {
+  background: var(--foam); border: 1px solid color-mix(in srgb, var(--espresso) 8%, transparent);
+  border-radius: var(--radius); padding: 22px 24px;
+  box-shadow: 0 10px 28px -18px color-mix(in srgb, var(--espresso) 45%, transparent);
+}
+.strip-ico { font-size: 26px; display: block; margin-bottom: 8px; }
+.strip-card h3 { font-size: 18.5px; margin-bottom: 4px; }
+.strip-card p { font-size: 14.5px; color: var(--roast); }
+
+/* about */
+.about {
+  display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(28px, 5vw, 64px); align-items: center;
+  max-width: 1080px; margin: 0 auto; padding: clamp(70px, 10vw, 110px) clamp(20px, 5vw, 64px);
+}
+.about h2 { font-size: clamp(28px, 4vw, 40px); margin-bottom: 16px; }
+.about-text p:not(.eyebrow) { color: var(--roast); margin-bottom: 14px; }
+.about-photo { border-radius: var(--radius); aspect-ratio: 4 / 3.2; width: 100%; object-fit: cover; }
+.about-photo.logo-fit { object-fit: contain; background: var(--foam); padding: 40px; }
+@media (max-width: 760px) { .about { grid-template-columns: 1fr; } }
+
+/* photo placeholders (kept when no license-safe photo exists) */
+.photo-ph, .g-ph {
+  display: flex; align-items: center; justify-content: center;
+  background:
+    radial-gradient(circle at 30% 25%, color-mix(in srgb, var(--caramel) 30%, transparent), transparent 60%),
+    var(--cream-2);
+  border: 1px solid color-mix(in srgb, var(--espresso) 8%, transparent);
+}
+.photo-ph span, .g-ph span { font-size: 44px; opacity: .55; }
+.g-ph.alt {
+  background:
+    radial-gradient(circle at 70% 70%, color-mix(in srgb, var(--roast) 22%, transparent), transparent 60%),
+    var(--cream-2);
+}
+
+/* menu */
+.menu { background: var(--cream-2); padding: clamp(70px, 10vw, 100px) clamp(20px, 5vw, 64px); }
+.menu h2, .gallery h2, .visit h2 { font-size: clamp(28px, 4vw, 40px); margin-bottom: 10px; }
+.menu-note { font-size: 13px; color: var(--caramel-deep); margin-bottom: 34px; font-style: italic; }
+.menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(28px, 5vw, 60px); max-width: 900px; margin: 0 auto; }
+.menu-col h3 { font-size: 21px; margin-bottom: 16px; color: var(--caramel-deep); }
+.mi { display: flex; align-items: baseline; gap: 8px; padding: 8px 0; }
+.mi-name { font-weight: 500; }
+.mi-dots { flex: 1; border-bottom: 2px dotted color-mix(in srgb, var(--espresso) 25%, transparent); transform: translateY(-4px); }
+.mi-price { font-weight: 700; color: var(--roast); white-space: nowrap; }
+.mi-desc { font-size: 13.5px; color: var(--roast); margin: -4px 0 6px; }
+
+/* gallery */
+.gallery { background: var(--cream-2); padding: clamp(70px, 10vw, 100px) clamp(20px, 5vw, 64px); }
+.gallery-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px;
+  max-width: 1080px; margin: 34px auto 0;
+}
+.gallery-grid > * { aspect-ratio: 1; border-radius: var(--radius); overflow: hidden; }
+.g-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* visit */
+.visit {
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(28px, 5vw, 60px);
+  max-width: 1080px; margin: 0 auto; padding: clamp(70px, 10vw, 110px) clamp(20px, 5vw, 64px);
+  align-items: start;
+}
+.visit-kv { display: flex; gap: 16px; padding: 11px 0; border-bottom: 1px solid color-mix(in srgb, var(--espresso) 12%, transparent); font-size: 15.5px; }
+.visit-kv .k { width: 84px; flex: none; font-weight: 700; color: var(--caramel-deep); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; padding-top: 3px; }
+.visit-social { margin-top: 18px; display: flex; gap: 16px; flex-wrap: wrap; font-weight: 700; }
+.visit-map iframe {
+  width: 100%; height: 340px; border: 1px solid color-mix(in srgb, var(--espresso) 12%, transparent);
+  border-radius: var(--radius); display: block;
+}
+.map-link { display: inline-block; margin-top: 10px; font-size: 13.5px; }
+@media (max-width: 760px) { .visit { grid-template-columns: 1fr; } }
+
+/* footer */
+.foot {
+  display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  padding: 26px clamp(20px, 5vw, 64px) 34px;
+  border-top: 1px solid color-mix(in srgb, var(--espresso) 10%, transparent);
+  font-size: 13.5px; color: var(--roast);
+}
+.foot-note { opacity: .75; }
